@@ -111,5 +111,10 @@ namespace QuizEditor
 			bindingSource.DataSource = filtered;
 			bindingSource.ResetBindings(false);
 		}
+
+		private void buttonClearSearch_Click(object sender, EventArgs e)
+		{
+			textBoxSearch.Text = string.Empty;
+		}
 	}
 }

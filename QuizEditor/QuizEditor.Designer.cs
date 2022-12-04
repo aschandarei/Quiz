@@ -33,6 +33,7 @@
 			this.listBoxQuestions = new System.Windows.Forms.ListBox();
 			this.buttonAdd = new System.Windows.Forms.Button();
 			this.buttonSave = new System.Windows.Forms.Button();
+			this.buttonClearSearch = new System.Windows.Forms.Button();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -46,6 +47,7 @@
 			this.tableLayoutPanel1.Controls.Add(this.listBoxQuestions, 0, 1);
 			this.tableLayoutPanel1.Controls.Add(this.buttonAdd, 1, 1);
 			this.tableLayoutPanel1.Controls.Add(this.buttonSave, 1, 3);
+			this.tableLayoutPanel1.Controls.Add(this.buttonClearSearch, 1, 0);
 			this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -99,6 +101,16 @@
 			this.buttonSave.UseVisualStyleBackColor = true;
 			this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
 			// 
+			// buttonClearSearch
+			// 
+			this.buttonClearSearch.Location = new System.Drawing.Point(1407, 3);
+			this.buttonClearSearch.Name = "buttonClearSearch";
+			this.buttonClearSearch.Size = new System.Drawing.Size(54, 23);
+			this.buttonClearSearch.TabIndex = 9;
+			this.buttonClearSearch.Text = "Clear";
+			this.buttonClearSearch.UseVisualStyleBackColor = true;
+			this.buttonClearSearch.Click += new System.EventHandler(this.buttonClearSearch_Click);
+			// 
 			// QuizEditor
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -120,5 +132,6 @@
 		private ListBox listBoxQuestions;
 		private Button buttonAdd;
 		private Button buttonSave;
+		private Button buttonClearSearch;
 	}
 }
