@@ -1,4 +1,5 @@
 ﻿using QuizLibrary;
+using System.Windows.Forms;
 
 namespace QuizEditor
 {
@@ -23,7 +24,7 @@ namespace QuizEditor
 			bindingSource.DataSource = _question.Answers;
 			textBoxQuestion.Text = _question.Content;
 			listBoxAnswers.DataSource = bindingSource;
-			listBoxAnswers.DisplayMember = "Presenter";
+			listBoxAnswers.DisplayMember = "Content";
 		}
 
 		private void buttonOk_Click(object sender, EventArgs e)
@@ -78,6 +79,16 @@ namespace QuizEditor
 				var formAnswer = new FormAnswer(EditAnswer, _selectedAnswer);
 				formAnswer.ShowDialog();
 			}
+		}
+
+		private void listBoxAnswers_DrawItem(object sender, DrawItemEventArgs e)
+		{
+			var item = _question.Answers[e.Index];
+			e.DrawBackground();
+			var brush = item.IsCorrect ? Brushes.Red : Brushes.Black;
+			var font = e.Font ?? new Font("Arial", 9);
+			e.Graphics.DrawString(item.Content, font, brush, e.Bounds, StringFormat.GenericDefault);
+			e.DrawFocusRectangle();
 		}
 	}
 }

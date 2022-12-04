@@ -17,7 +17,5 @@
 			Content = content;
 			IsCorrect = correct;
 		}
-
-		public string Presenter => $"{Content} {(IsCorrect?"[correct]":"[wrong]")}";
 	}
 }

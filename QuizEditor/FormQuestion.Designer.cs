@@ -87,6 +87,7 @@
 			// listBoxAnswers
 			// 
 			this.listBoxAnswers.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.listBoxAnswers.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
 			this.listBoxAnswers.FormattingEnabled = true;
 			this.listBoxAnswers.ItemHeight = 15;
 			this.listBoxAnswers.Location = new System.Drawing.Point(3, 238);
@@ -94,6 +95,7 @@
 			this.tableLayoutPanel.SetRowSpan(this.listBoxAnswers, 2);
 			this.listBoxAnswers.Size = new System.Drawing.Size(734, 209);
 			this.listBoxAnswers.TabIndex = 3;
+			this.listBoxAnswers.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBoxAnswers_DrawItem);
 			this.listBoxAnswers.SelectedIndexChanged += new System.EventHandler(this.listBoxAnswers_SelectedIndexChanged);
 			this.listBoxAnswers.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBoxAnswers_MouseDoubleClick);
 			// 
