@@ -31,7 +31,6 @@
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.textBoxSearch = new System.Windows.Forms.TextBox();
 			this.listBoxQuestions = new System.Windows.Forms.ListBox();
-			this.buttonClearFilter = new System.Windows.Forms.Button();
 			this.buttonAdd = new System.Windows.Forms.Button();
 			this.buttonSave = new System.Windows.Forms.Button();
 			this.tableLayoutPanel1.SuspendLayout();
@@ -39,13 +38,12 @@
 			// 
 			// tableLayoutPanel1
 			// 
-			this.tableLayoutPanel1.ColumnCount = 3;
+			this.tableLayoutPanel1.ColumnCount = 2;
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
 			this.tableLayoutPanel1.Controls.Add(this.textBoxSearch, 0, 0);
 			this.tableLayoutPanel1.Controls.Add(this.listBoxQuestions, 0, 1);
-			this.tableLayoutPanel1.Controls.Add(this.buttonClearFilter, 1, 0);
 			this.tableLayoutPanel1.Controls.Add(this.buttonAdd, 1, 1);
 			this.tableLayoutPanel1.Controls.Add(this.buttonSave, 1, 3);
 			this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -66,7 +64,7 @@
 			this.textBoxSearch.Name = "textBoxSearch";
 			this.textBoxSearch.Size = new System.Drawing.Size(1398, 23);
 			this.textBoxSearch.TabIndex = 2;
-			this.textBoxSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxSearch_KeyDown);
+			this.textBoxSearch.TextChanged += new System.EventHandler(this.textBoxSearch_TextChanged);
 			// 
 			// listBoxQuestions
 			// 
@@ -78,22 +76,10 @@
 			this.tableLayoutPanel1.SetRowSpan(this.listBoxQuestions, 3);
 			this.listBoxQuestions.Size = new System.Drawing.Size(1398, 576);
 			this.listBoxQuestions.TabIndex = 4;
-			this.listBoxQuestions.SelectedIndexChanged += new System.EventHandler(this.listBoxQuestions_SelectedIndexChanged);
 			this.listBoxQuestions.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBoxQuestions_MouseDoubleClick);
-			// 
-			// buttonClearFilter
-			// 
-			this.buttonClearFilter.Location = new System.Drawing.Point(1407, 3);
-			this.buttonClearFilter.Name = "buttonClearFilter";
-			this.buttonClearFilter.Size = new System.Drawing.Size(24, 23);
-			this.buttonClearFilter.TabIndex = 5;
-			this.buttonClearFilter.Text = "X";
-			this.buttonClearFilter.UseVisualStyleBackColor = true;
-			this.buttonClearFilter.Click += new System.EventHandler(this.buttonClearFilter_Click);
 			// 
 			// buttonAdd
 			// 
-			this.tableLayoutPanel1.SetColumnSpan(this.buttonAdd, 2);
 			this.buttonAdd.Dock = System.Windows.Forms.DockStyle.Top;
 			this.buttonAdd.Location = new System.Drawing.Point(1407, 33);
 			this.buttonAdd.Name = "buttonAdd";
@@ -105,7 +91,6 @@
 			// 
 			// buttonSave
 			// 
-			this.tableLayoutPanel1.SetColumnSpan(this.buttonSave, 2);
 			this.buttonSave.Location = new System.Drawing.Point(1407, 585);
 			this.buttonSave.Name = "buttonSave";
 			this.buttonSave.Size = new System.Drawing.Size(54, 23);
@@ -133,7 +118,6 @@
 		private TableLayoutPanel tableLayoutPanel1;
 		private TextBox textBoxSearch;
 		private ListBox listBoxQuestions;
-		private Button buttonClearFilter;
 		private Button buttonAdd;
 		private Button buttonSave;
 	}

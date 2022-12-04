@@ -30,13 +30,6 @@ namespace QuizEditor
 			}
 		}
 
-		private void buttonClearFilter_Click(object sender, EventArgs e)
-		{
-			bindingSource.DataSource = _quiz.Questions;
-			bindingSource.ResetBindings(false);
-			textBoxSearch.Text = string.Empty;
-		}
-
 		private void buttonSave_Click(object sender, EventArgs e)
 		{
 			if (string.IsNullOrEmpty(_path)) return;
@@ -58,6 +51,7 @@ namespace QuizEditor
 		{
 			_quiz.Questions.Add(question);
 			_quiz.Questions = _quiz.Questions.OrderBy(q => q.Content).ToList();
+			FilterQuestions(textBoxSearch.Text);
 			Text = $"{_quiz.Name} - ({_quiz.Questions.Count} questions from {_path})";
 		}
 
@@ -66,42 +60,9 @@ namespace QuizEditor
 			bindingSource.ResetBindings(false);
 		}
 
-		private void textBoxSearch_KeyDown(object sender, KeyEventArgs e)
-		{
-			if (e.KeyCode == Keys.Enter)
-			{
-				var filtered = new List<Question>();
-				var lookFor = textBoxSearch.Text;
-				foreach (var question in _quiz.Questions)
-				{
-					var hit = false;
-					if (question.Content.Contains(lookFor))
-					{
-						hit = true;
-					}
-					else
-					{
-						foreach (var answer in question.Answers)
-						{
-							if (answer.Content.Contains(lookFor))
-							{
-								hit = true;
-								break;
-							}
-						}
-					}
-					if (hit)
-					{
-						filtered.Add(question);
-					}
-				}
-				bindingSource.DataSource = filtered;
-				bindingSource.ResetBindings(false);
-			}
-		}
-
 		private void listBoxQuestions_MouseDoubleClick(object sender, MouseEventArgs e)
 		{
+			_selectedQuestion = listBoxQuestions.SelectedItem as Question;
 			if (_selectedQuestion!= null)
 			{
 				var formQuestion = new FormQuestion(EditQuestion, _selectedQuestion);
@@ -109,9 +70,46 @@ namespace QuizEditor
 			}
 		}
 
-		private void listBoxQuestions_SelectedIndexChanged(object sender, EventArgs e)
+		private void textBoxSearch_TextChanged(object sender, EventArgs e)
 		{
-			_selectedQuestion = _quiz.Questions[listBoxQuestions.SelectedIndex];
+			FilterQuestions(textBoxSearch.Text);
+		}
+
+		private void FilterQuestions(string lookFor)
+		{
+			if (string.IsNullOrEmpty(lookFor))
+			{
+				bindingSource.DataSource = _quiz.Questions;
+				bindingSource.ResetBindings(false);
+				return;
+			}
+
+			var filtered = new List<Question>();
+			foreach (var question in _quiz.Questions)
+			{
+				var hit = false;
+				if (question.Content.Contains(lookFor))
+				{
+					hit = true;
+				}
+				else
+				{
+					foreach (var answer in question.Answers)
+					{
+						if (answer.Content.Contains(lookFor))
+						{
+							hit = true;
+							break;
+						}
+					}
+				}
+				if (hit)
+				{
+					filtered.Add(question);
+				}
+			}
+			bindingSource.DataSource = filtered;
+			bindingSource.ResetBindings(false);
 		}
 	}
 }

@@ -36,6 +36,7 @@
 			this.buttonAddAnswer = new System.Windows.Forms.Button();
 			this.buttonCancel = new System.Windows.Forms.Button();
 			this.buttonDeleteAnswer = new System.Windows.Forms.Button();
+			this.buttonAddYesNo = new System.Windows.Forms.Button();
 			this.tableLayoutPanel.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -49,16 +50,18 @@
 			this.tableLayoutPanel.Controls.Add(this.labelAnswers, 0, 2);
 			this.tableLayoutPanel.Controls.Add(this.listBoxAnswers, 0, 3);
 			this.tableLayoutPanel.Controls.Add(this.buttonOk, 1, 0);
-			this.tableLayoutPanel.Controls.Add(this.buttonAddAnswer, 1, 3);
+			this.tableLayoutPanel.Controls.Add(this.buttonAddAnswer, 1, 4);
 			this.tableLayoutPanel.Controls.Add(this.buttonCancel, 1, 1);
-			this.tableLayoutPanel.Controls.Add(this.buttonDeleteAnswer, 1, 4);
+			this.tableLayoutPanel.Controls.Add(this.buttonDeleteAnswer, 1, 5);
+			this.tableLayoutPanel.Controls.Add(this.buttonAddYesNo, 1, 3);
 			this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tableLayoutPanel.Location = new System.Drawing.Point(0, 0);
 			this.tableLayoutPanel.Name = "tableLayoutPanel";
-			this.tableLayoutPanel.RowCount = 5;
+			this.tableLayoutPanel.RowCount = 6;
 			this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
 			this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
 			this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
 			this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
 			this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
 			this.tableLayoutPanel.Size = new System.Drawing.Size(800, 450);
@@ -71,14 +74,14 @@
 			this.textBoxQuestion.Multiline = true;
 			this.textBoxQuestion.Name = "textBoxQuestion";
 			this.tableLayoutPanel.SetRowSpan(this.textBoxQuestion, 2);
-			this.textBoxQuestion.Size = new System.Drawing.Size(734, 209);
+			this.textBoxQuestion.Size = new System.Drawing.Size(734, 194);
 			this.textBoxQuestion.TabIndex = 1;
 			// 
 			// labelAnswers
 			// 
 			this.labelAnswers.AutoSize = true;
 			this.labelAnswers.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.labelAnswers.Location = new System.Drawing.Point(3, 215);
+			this.labelAnswers.Location = new System.Drawing.Point(3, 200);
 			this.labelAnswers.Name = "labelAnswers";
 			this.labelAnswers.Size = new System.Drawing.Size(734, 20);
 			this.labelAnswers.TabIndex = 2;
@@ -90,13 +93,12 @@
 			this.listBoxAnswers.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
 			this.listBoxAnswers.FormattingEnabled = true;
 			this.listBoxAnswers.ItemHeight = 15;
-			this.listBoxAnswers.Location = new System.Drawing.Point(3, 238);
+			this.listBoxAnswers.Location = new System.Drawing.Point(3, 223);
 			this.listBoxAnswers.Name = "listBoxAnswers";
-			this.tableLayoutPanel.SetRowSpan(this.listBoxAnswers, 2);
-			this.listBoxAnswers.Size = new System.Drawing.Size(734, 209);
+			this.tableLayoutPanel.SetRowSpan(this.listBoxAnswers, 3);
+			this.listBoxAnswers.Size = new System.Drawing.Size(734, 224);
 			this.listBoxAnswers.TabIndex = 3;
 			this.listBoxAnswers.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBoxAnswers_DrawItem);
-			this.listBoxAnswers.SelectedIndexChanged += new System.EventHandler(this.listBoxAnswers_SelectedIndexChanged);
 			this.listBoxAnswers.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBoxAnswers_MouseDoubleClick);
 			// 
 			// buttonOk
@@ -115,7 +117,7 @@
 			// 
 			this.tableLayoutPanel.SetColumnSpan(this.buttonAddAnswer, 2);
 			this.buttonAddAnswer.Dock = System.Windows.Forms.DockStyle.Top;
-			this.buttonAddAnswer.Location = new System.Drawing.Point(743, 238);
+			this.buttonAddAnswer.Location = new System.Drawing.Point(743, 253);
 			this.buttonAddAnswer.Name = "buttonAddAnswer";
 			this.buttonAddAnswer.Size = new System.Drawing.Size(54, 23);
 			this.buttonAddAnswer.TabIndex = 5;
@@ -137,13 +139,24 @@
 			// buttonDeleteAnswer
 			// 
 			this.tableLayoutPanel.SetColumnSpan(this.buttonDeleteAnswer, 2);
-			this.buttonDeleteAnswer.Location = new System.Drawing.Point(743, 268);
+			this.buttonDeleteAnswer.Location = new System.Drawing.Point(743, 283);
 			this.buttonDeleteAnswer.Name = "buttonDeleteAnswer";
 			this.buttonDeleteAnswer.Size = new System.Drawing.Size(54, 23);
 			this.buttonDeleteAnswer.TabIndex = 8;
 			this.buttonDeleteAnswer.Text = "Delete";
 			this.buttonDeleteAnswer.UseVisualStyleBackColor = true;
 			this.buttonDeleteAnswer.Click += new System.EventHandler(this.buttonDeleteAnswer_Click);
+			// 
+			// buttonAddYesNo
+			// 
+			this.tableLayoutPanel.SetColumnSpan(this.buttonAddYesNo, 2);
+			this.buttonAddYesNo.Location = new System.Drawing.Point(743, 223);
+			this.buttonAddYesNo.Name = "buttonAddYesNo";
+			this.buttonAddYesNo.Size = new System.Drawing.Size(54, 23);
+			this.buttonAddYesNo.TabIndex = 9;
+			this.buttonAddYesNo.Text = "Y/N";
+			this.buttonAddYesNo.UseVisualStyleBackColor = true;
+			this.buttonAddYesNo.Click += new System.EventHandler(this.buttonAddYesNo_Click);
 			// 
 			// FormQuestion
 			// 
@@ -169,5 +182,6 @@
 		private Button buttonAddAnswer;
 		private Button buttonCancel;
 		private Button buttonDeleteAnswer;
+		private Button buttonAddYesNo;
 	}
 }

@@ -26,5 +26,16 @@ namespace QuizEditor
 			_answerAction?.Invoke(_answer);
 			Close();
 		}
+
+		private void buttonBulk_Click(object sender, EventArgs e)
+		{
+			foreach (var line in textBoxAnswer.Text.Split(Environment.NewLine))
+			{
+				var answer = new Answer();
+				answer.Content = line[2..];
+				_answerAction?.Invoke(answer);
+			}
+			Close();
+		}
 	}
 }

@@ -53,11 +53,6 @@ namespace QuizEditor
 		}
 
 
-		private void listBoxAnswers_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			_selectedAnswer = _question.Answers[listBoxAnswers.SelectedIndex];
-		}
-
 		private void buttonCancel_Click(object sender, EventArgs e)
 		{
 			Close();
@@ -65,6 +60,7 @@ namespace QuizEditor
 
 		private void buttonDeleteAnswer_Click(object sender, EventArgs e)
 		{
+			_selectedAnswer = listBoxAnswers.SelectedItem as Answer;
 			if (_selectedAnswer != null)
 			{
 				_question.Answers.Remove(_selectedAnswer);
@@ -74,6 +70,7 @@ namespace QuizEditor
 
 		private void listBoxAnswers_MouseDoubleClick(object sender, MouseEventArgs e)
 		{
+			_selectedAnswer = listBoxAnswers.SelectedItem as Answer;
 			if (_selectedAnswer != null)
 			{
 				var formAnswer = new FormAnswer(EditAnswer, _selectedAnswer);
@@ -83,12 +80,22 @@ namespace QuizEditor
 
 		private void listBoxAnswers_DrawItem(object sender, DrawItemEventArgs e)
 		{
-			var item = _question.Answers[e.Index];
-			e.DrawBackground();
-			var brush = item.IsCorrect ? Brushes.Red : Brushes.Black;
-			var font = e.Font ?? new Font("Arial", 9);
-			e.Graphics.DrawString(item.Content, font, brush, e.Bounds, StringFormat.GenericDefault);
-			e.DrawFocusRectangle();
+			if (_question.Answers.Count > 0)
+			{
+				var item = _question.Answers[e.Index];
+				e.DrawBackground();
+				var brush = item.IsCorrect ? Brushes.Red : Brushes.Black;
+				var font = e.Font ?? new Font("Arial", 9);
+				e.Graphics.DrawString(item.Content, font, brush, e.Bounds, StringFormat.GenericDefault);
+				e.DrawFocusRectangle();
+			}
+		}
+
+		private void buttonAddYesNo_Click(object sender, EventArgs e)
+		{
+			_question.Answers.Add(new Answer("Yes"));
+			_question.Answers.Add(new Answer("No"));
+			bindingSource.ResetBindings(false);
 		}
 	}
 }

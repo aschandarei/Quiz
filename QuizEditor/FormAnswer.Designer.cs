@@ -33,17 +33,20 @@
 			this.textBoxAnswer = new System.Windows.Forms.TextBox();
 			this.checkBoxCorrectAnswer = new System.Windows.Forms.CheckBox();
 			this.buttonOk = new System.Windows.Forms.Button();
+			this.buttonBulk = new System.Windows.Forms.Button();
 			this.tableLayoutPanel.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// tableLayoutPanel
 			// 
-			this.tableLayoutPanel.ColumnCount = 1;
-			this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.tableLayoutPanel.ColumnCount = 2;
+			this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
 			this.tableLayoutPanel.Controls.Add(this.labelAnswerText, 0, 0);
 			this.tableLayoutPanel.Controls.Add(this.textBoxAnswer, 0, 1);
 			this.tableLayoutPanel.Controls.Add(this.checkBoxCorrectAnswer, 0, 2);
-			this.tableLayoutPanel.Controls.Add(this.buttonOk, 0, 3);
+			this.tableLayoutPanel.Controls.Add(this.buttonOk, 1, 3);
+			this.tableLayoutPanel.Controls.Add(this.buttonBulk, 0, 3);
 			this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tableLayoutPanel.Location = new System.Drawing.Point(0, 0);
 			this.tableLayoutPanel.Name = "tableLayoutPanel";
@@ -58,6 +61,7 @@
 			// labelAnswerText
 			// 
 			this.labelAnswerText.AutoSize = true;
+			this.tableLayoutPanel.SetColumnSpan(this.labelAnswerText, 2);
 			this.labelAnswerText.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.labelAnswerText.Location = new System.Drawing.Point(3, 0);
 			this.labelAnswerText.Name = "labelAnswerText";
@@ -67,6 +71,7 @@
 			// 
 			// textBoxAnswer
 			// 
+			this.tableLayoutPanel.SetColumnSpan(this.textBoxAnswer, 2);
 			this.textBoxAnswer.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.textBoxAnswer.Location = new System.Drawing.Point(3, 23);
 			this.textBoxAnswer.Multiline = true;
@@ -77,9 +82,11 @@
 			// checkBoxCorrectAnswer
 			// 
 			this.checkBoxCorrectAnswer.AutoSize = true;
+			this.tableLayoutPanel.SetColumnSpan(this.checkBoxCorrectAnswer, 2);
+			this.checkBoxCorrectAnswer.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.checkBoxCorrectAnswer.Location = new System.Drawing.Point(3, 393);
 			this.checkBoxCorrectAnswer.Name = "checkBoxCorrectAnswer";
-			this.checkBoxCorrectAnswer.Size = new System.Drawing.Size(114, 19);
+			this.checkBoxCorrectAnswer.Size = new System.Drawing.Size(794, 24);
 			this.checkBoxCorrectAnswer.TabIndex = 2;
 			this.checkBoxCorrectAnswer.Text = "Is correct answer";
 			this.checkBoxCorrectAnswer.UseVisualStyleBackColor = true;
@@ -94,6 +101,17 @@
 			this.buttonOk.Text = "OK";
 			this.buttonOk.UseVisualStyleBackColor = true;
 			this.buttonOk.Click += new System.EventHandler(this.buttonOk_Click);
+			// 
+			// buttonBulk
+			// 
+			this.buttonBulk.Dock = System.Windows.Forms.DockStyle.Left;
+			this.buttonBulk.Location = new System.Drawing.Point(3, 423);
+			this.buttonBulk.Name = "buttonBulk";
+			this.buttonBulk.Size = new System.Drawing.Size(75, 24);
+			this.buttonBulk.TabIndex = 4;
+			this.buttonBulk.Text = "BULK";
+			this.buttonBulk.UseVisualStyleBackColor = true;
+			this.buttonBulk.Click += new System.EventHandler(this.buttonBulk_Click);
 			// 
 			// FormAnswer
 			// 
@@ -116,5 +134,6 @@
 		private TextBox textBoxAnswer;
 		private CheckBox checkBoxCorrectAnswer;
 		private Button buttonOk;
+		private Button buttonBulk;
 	}
 }
