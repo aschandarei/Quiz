@@ -12,21 +12,15 @@ namespace QuizEditor
 		public QuizEditor()
 		{
 			InitializeComponent();
-			this.labelQuestionsFile.Text = string.Empty;
-		}
-
-		private void buttonOpenFile_Click(object sender, EventArgs e)
-		{
 			var ofd = new OpenFileDialog();
 			ofd.Filter = "JSON files (*.json)|*.json";
 			var result = ofd.ShowDialog();
 			if (result == DialogResult.OK)
 			{
 				_path = ofd.FileName;
-				labelQuestionsFile.Text = _path;
 				var content = File.ReadAllText(_path);
 				_quiz = JsonSerializer.Deserialize<Quiz>(content) ?? new Quiz();
-				Text = _quiz.Name;
+				Text = $"{_quiz.Name} - ({_path})";
 				_quiz.Questions.OrderBy(q => q.Content);
 				setDataSource(_quiz.Questions);
 			}

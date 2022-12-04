@@ -8,14 +8,15 @@ namespace QuizEditor
 		private Answer _answer = new();
 		public FormAnswer(Action<Answer> answerAction, Answer? answer = null)
 		{
+			InitializeComponent();
+
 			_answerAction = answerAction;
-			if (answer != null )
+			if (answer != null)
 			{
 				_answer = answer;
-				textBoxAnswer.Text = answer.Content;
-				checkBoxCorrectAnswer.Checked = answer.IsCorrect;
 			}
-			InitializeComponent();
+			textBoxAnswer.Text = _answer.Content;
+			checkBoxCorrectAnswer.Checked = _answer.IsCorrect;
 		}
 
 		private void buttonOk_Click(object sender, EventArgs e)

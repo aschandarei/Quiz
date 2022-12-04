@@ -21,8 +21,9 @@ namespace QuizEditor
 				_question = question;
 			}
 			bindingSource.DataSource = _question.Answers;
+			textBoxQuestion.Text = _question.Content;
 			listBoxAnswers.DataSource = bindingSource;
-			listBoxAnswers.DisplayMember = "Content";
+			listBoxAnswers.DisplayMember = "Presenter";
 		}
 
 		private void buttonOk_Click(object sender, EventArgs e)
