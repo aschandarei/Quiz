@@ -5,9 +5,11 @@ namespace QuizEditor
 {
 	public partial class QuizEditor : Form
 	{
-		private Quiz _quiz = new();
-		private string _path = string.Empty;
+		private readonly Quiz _quiz = new();
+		private readonly string _path = string.Empty;
 		private Question? _selectedQuestion = null;
+		private readonly BindingSource bindingSource = new();
+
 
 		public QuizEditor()
 		{
@@ -20,26 +22,18 @@ namespace QuizEditor
 				_path = ofd.FileName;
 				var content = File.ReadAllText(_path);
 				_quiz = JsonSerializer.Deserialize<Quiz>(content) ?? new Quiz();
-				Text = $"{_quiz.Name} - ({_path})";
-				_quiz.Questions.OrderBy(q => q.Content);
-				setDataSource(_quiz.Questions);
+				Text = $"{_quiz.Name} - ({_quiz.Questions.Count} questions from {_path})";
+				_quiz.Questions = _quiz.Questions.OrderBy(q => q.Content).ToList();
+				bindingSource.DataSource = _quiz.Questions;
+				listBoxQuestions.DataSource = bindingSource;
+				listBoxQuestions.DisplayMember = "Content";
 			}
-		}
-
-		private void setDataSource(List<Question> questions)
-		{
-			listBoxQuestions.DataSource = questions;
-			listBoxQuestions.DisplayMember = "Content";
-		}
-
-		private void buttonSearch_Click(object sender, EventArgs e)
-		{
-
 		}
 
 		private void buttonClearFilter_Click(object sender, EventArgs e)
 		{
-			setDataSource(_quiz.Questions);
+			bindingSource.DataSource = _quiz.Questions;
+			bindingSource.ResetBindings(false);
 			textBoxSearch.Text = string.Empty;
 		}
 
@@ -63,11 +57,13 @@ namespace QuizEditor
 		private void AddQuestion(Question question)
 		{
 			_quiz.Questions.Add(question);
+			_quiz.Questions = _quiz.Questions.OrderBy(q => q.Content).ToList();
+			Text = $"{_quiz.Name} - ({_quiz.Questions.Count} questions from {_path})";
 		}
 
 		private void EditQuestion(Question question)
 		{
-			
+			bindingSource.ResetBindings(false);
 		}
 
 		private void textBoxSearch_KeyDown(object sender, KeyEventArgs e)
@@ -99,7 +95,8 @@ namespace QuizEditor
 						filtered.Add(question);
 					}
 				}
-				setDataSource(filtered);
+				bindingSource.DataSource = filtered;
+				bindingSource.ResetBindings(false);
 			}
 		}
 
