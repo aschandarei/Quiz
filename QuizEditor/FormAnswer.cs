@@ -16,15 +16,17 @@ namespace QuizEditor
 				_answer = answer;
 			}
 			textBoxAnswer.Text = _answer.Content;
-			checkBoxCorrectAnswer.Checked = _answer.IsCorrect;
-		}
+			if (_answer.IsCorrect)
+			{
+				buttonCorrect.ForeColor = Color.Red;
+				buttonWrong.ForeColor = Color.Black;
+			}
+			else
+			{
+				buttonCorrect.ForeColor = Color.Black;
+				buttonWrong.ForeColor = Color.Red;
+			}
 
-		private void buttonOk_Click(object sender, EventArgs e)
-		{
-			_answer.Content = textBoxAnswer.Text;
-			_answer.IsCorrect = checkBoxCorrectAnswer.Checked;
-			_answerAction?.Invoke(_answer);
-			Close();
 		}
 
 		private void buttonBulk_Click(object sender, EventArgs e)
@@ -35,6 +37,22 @@ namespace QuizEditor
 				answer.Content = line[2..];
 				_answerAction?.Invoke(answer);
 			}
+			Close();
+		}
+
+		private void buttonWrong_Click(object sender, EventArgs e)
+		{
+			_answer.Content = textBoxAnswer.Text;
+			_answer.IsCorrect = false;
+			_answerAction?.Invoke(_answer);
+			Close();
+		}
+
+		private void buttonCorrect_Click(object sender, EventArgs e)
+		{
+			_answer.Content = textBoxAnswer.Text;
+			_answer.IsCorrect = true;
+			_answerAction?.Invoke(_answer);
 			Close();
 		}
 	}

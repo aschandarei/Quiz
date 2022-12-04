@@ -29,89 +29,75 @@
 		private void InitializeComponent()
 		{
 			this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-			this.labelAnswerText = new System.Windows.Forms.Label();
 			this.textBoxAnswer = new System.Windows.Forms.TextBox();
-			this.checkBoxCorrectAnswer = new System.Windows.Forms.CheckBox();
-			this.buttonOk = new System.Windows.Forms.Button();
+			this.buttonCorrect = new System.Windows.Forms.Button();
 			this.buttonBulk = new System.Windows.Forms.Button();
+			this.buttonWrong = new System.Windows.Forms.Button();
 			this.tableLayoutPanel.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// tableLayoutPanel
 			// 
-			this.tableLayoutPanel.ColumnCount = 2;
-			this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tableLayoutPanel.Controls.Add(this.labelAnswerText, 0, 0);
-			this.tableLayoutPanel.Controls.Add(this.textBoxAnswer, 0, 1);
-			this.tableLayoutPanel.Controls.Add(this.checkBoxCorrectAnswer, 0, 2);
-			this.tableLayoutPanel.Controls.Add(this.buttonOk, 1, 3);
-			this.tableLayoutPanel.Controls.Add(this.buttonBulk, 0, 3);
+			this.tableLayoutPanel.ColumnCount = 4;
+			this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+			this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+			this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+			this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+			this.tableLayoutPanel.Controls.Add(this.textBoxAnswer, 0, 0);
+			this.tableLayoutPanel.Controls.Add(this.buttonCorrect, 3, 1);
+			this.tableLayoutPanel.Controls.Add(this.buttonBulk, 0, 1);
+			this.tableLayoutPanel.Controls.Add(this.buttonWrong, 2, 1);
 			this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tableLayoutPanel.Location = new System.Drawing.Point(0, 0);
 			this.tableLayoutPanel.Name = "tableLayoutPanel";
-			this.tableLayoutPanel.RowCount = 4;
-			this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.tableLayoutPanel.RowCount = 2;
 			this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
 			this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
 			this.tableLayoutPanel.Size = new System.Drawing.Size(800, 450);
 			this.tableLayoutPanel.TabIndex = 0;
 			// 
-			// labelAnswerText
-			// 
-			this.labelAnswerText.AutoSize = true;
-			this.tableLayoutPanel.SetColumnSpan(this.labelAnswerText, 2);
-			this.labelAnswerText.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.labelAnswerText.Location = new System.Drawing.Point(3, 0);
-			this.labelAnswerText.Name = "labelAnswerText";
-			this.labelAnswerText.Size = new System.Drawing.Size(794, 20);
-			this.labelAnswerText.TabIndex = 0;
-			this.labelAnswerText.Text = "Answer text";
-			// 
 			// textBoxAnswer
 			// 
-			this.tableLayoutPanel.SetColumnSpan(this.textBoxAnswer, 2);
+			this.tableLayoutPanel.SetColumnSpan(this.textBoxAnswer, 4);
 			this.textBoxAnswer.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.textBoxAnswer.Location = new System.Drawing.Point(3, 23);
+			this.textBoxAnswer.Location = new System.Drawing.Point(3, 3);
 			this.textBoxAnswer.Multiline = true;
 			this.textBoxAnswer.Name = "textBoxAnswer";
-			this.textBoxAnswer.Size = new System.Drawing.Size(794, 364);
+			this.textBoxAnswer.Size = new System.Drawing.Size(794, 414);
 			this.textBoxAnswer.TabIndex = 1;
 			// 
-			// checkBoxCorrectAnswer
+			// buttonCorrect
 			// 
-			this.checkBoxCorrectAnswer.AutoSize = true;
-			this.tableLayoutPanel.SetColumnSpan(this.checkBoxCorrectAnswer, 2);
-			this.checkBoxCorrectAnswer.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.checkBoxCorrectAnswer.Location = new System.Drawing.Point(3, 393);
-			this.checkBoxCorrectAnswer.Name = "checkBoxCorrectAnswer";
-			this.checkBoxCorrectAnswer.Size = new System.Drawing.Size(794, 24);
-			this.checkBoxCorrectAnswer.TabIndex = 2;
-			this.checkBoxCorrectAnswer.Text = "Is correct answer";
-			this.checkBoxCorrectAnswer.UseVisualStyleBackColor = true;
-			// 
-			// buttonOk
-			// 
-			this.buttonOk.Dock = System.Windows.Forms.DockStyle.Right;
-			this.buttonOk.Location = new System.Drawing.Point(722, 423);
-			this.buttonOk.Name = "buttonOk";
-			this.buttonOk.Size = new System.Drawing.Size(75, 24);
-			this.buttonOk.TabIndex = 3;
-			this.buttonOk.Text = "OK";
-			this.buttonOk.UseVisualStyleBackColor = true;
-			this.buttonOk.Click += new System.EventHandler(this.buttonOk_Click);
+			this.buttonCorrect.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.buttonCorrect.Location = new System.Drawing.Point(603, 423);
+			this.buttonCorrect.Name = "buttonCorrect";
+			this.buttonCorrect.Size = new System.Drawing.Size(194, 24);
+			this.buttonCorrect.TabIndex = 3;
+			this.buttonCorrect.Text = "Correct";
+			this.buttonCorrect.UseVisualStyleBackColor = true;
+			this.buttonCorrect.Click += new System.EventHandler(this.buttonCorrect_Click);
 			// 
 			// buttonBulk
 			// 
-			this.buttonBulk.Dock = System.Windows.Forms.DockStyle.Left;
+			this.buttonBulk.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.buttonBulk.Location = new System.Drawing.Point(3, 423);
 			this.buttonBulk.Name = "buttonBulk";
-			this.buttonBulk.Size = new System.Drawing.Size(75, 24);
+			this.buttonBulk.Size = new System.Drawing.Size(194, 24);
 			this.buttonBulk.TabIndex = 4;
 			this.buttonBulk.Text = "BULK";
 			this.buttonBulk.UseVisualStyleBackColor = true;
 			this.buttonBulk.Click += new System.EventHandler(this.buttonBulk_Click);
+			// 
+			// buttonWrong
+			// 
+			this.buttonWrong.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.buttonWrong.Location = new System.Drawing.Point(403, 423);
+			this.buttonWrong.Name = "buttonWrong";
+			this.buttonWrong.Size = new System.Drawing.Size(194, 24);
+			this.buttonWrong.TabIndex = 5;
+			this.buttonWrong.Text = "Wrong";
+			this.buttonWrong.UseVisualStyleBackColor = true;
+			this.buttonWrong.Click += new System.EventHandler(this.buttonWrong_Click);
 			// 
 			// FormAnswer
 			// 
@@ -130,10 +116,9 @@
 		#endregion
 
 		private TableLayoutPanel tableLayoutPanel;
-		private Label labelAnswerText;
 		private TextBox textBoxAnswer;
-		private CheckBox checkBoxCorrectAnswer;
-		private Button buttonOk;
+		private Button buttonCorrect;
 		private Button buttonBulk;
+		private Button buttonWrong;
 	}
 }
