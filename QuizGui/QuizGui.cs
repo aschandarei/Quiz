@@ -1,5 +1,6 @@
 using System.Reflection;
 using System.Text.Json;
+using System.Windows.Forms;
 using QuizLibrary;
 
 namespace QuizGui
@@ -56,27 +57,38 @@ namespace QuizGui
 
 			try
 			{
-				var workingDirectory = new FileInfo(Assembly.GetExecutingAssembly().Location).DirectoryName;
-				var content = File.ReadAllText($@"{workingDirectory}\quiz.json");
-				var quiz = JsonSerializer.Deserialize<Quiz>(content) ?? new Quiz();
-
-				Questions = quiz.Questions;
-				Text = quiz.Name;
-				if (Questions.Count < 1) throw new Exception("Not enough questions!");
-
-				foreach (var question in Questions)
+				var ofd = new OpenFileDialog();
+				ofd.Filter = "JSON files (*.json)|*.json";
+				var result = ofd.ShowDialog();
+				if (result == DialogResult.OK)
 				{
-					Scored.Add(0);
-					foreach (var answer in question.Answers) if (answer.IsCorrect) HighScores++;
-				}
+					var path = ofd.FileName;
+					var content = File.ReadAllText(path);
+					var quiz = JsonSerializer.Deserialize<Quiz>(content) ?? new Quiz();
 
-				// Shuffle questions
-				Questions = Questions.OrderBy(item => random.Next()).ToList();
+					Questions = quiz.Questions;
+					Text = $"{quiz.Name} - ({quiz.Questions.Count} questions from {path})";
+					if (Questions.Count < 1) throw new Exception("Not enough questions!");
+
+					foreach (var question in Questions)
+					{
+						Scored.Add(0);
+						foreach (var answer in question.Answers) if (answer.IsCorrect) HighScores++;
+					}
+
+					// Shuffle questions
+					Questions = Questions.OrderBy(item => random.Next()).ToList();
+				}
+				else
+				{
+					Environment.Exit(1);
+				}
 			}
 			catch (Exception ex)
 			{
 				MessageBox.Show(ex.Message);
-				Application.Exit();
+				Environment.Exit(1);
+				return;
 			}
 
 			AskQuestion();
@@ -93,7 +105,7 @@ namespace QuizGui
 			if (index >= Questions.Count)
 			{
 				MessageBox.Show($"Finished!\r\nScored: {labelScored.Text}\r\n{labelPercent.Text}");
-				Application.Exit();
+				Environment.Exit(1);
 				return;
 			}
 

@@ -6,7 +6,7 @@ namespace QuizEditor
 	public partial class QuizEditor : Form
 	{
 		private readonly Quiz _quiz = new();
-		private readonly string _path = string.Empty;
+		private string _path = string.Empty;
 		private Question? _selectedQuestion = null;
 		private readonly BindingSource bindingSource = new();
 
@@ -14,31 +14,76 @@ namespace QuizEditor
 		public QuizEditor()
 		{
 			InitializeComponent();
-			var ofd = new OpenFileDialog();
-			ofd.Filter = "JSON files (*.json)|*.json";
-			var result = ofd.ShowDialog();
-			if (result == DialogResult.OK)
+
+			try
 			{
-				_path = ofd.FileName;
-				var content = File.ReadAllText(_path);
-				_quiz = JsonSerializer.Deserialize<Quiz>(content) ?? new Quiz();
-				Text = $"{_quiz.Name} - ({_quiz.Questions.Count} questions from {_path})";
-				_quiz.Questions = _quiz.Questions.OrderBy(q => q.Content).ToList();
-				bindingSource.DataSource = _quiz.Questions;
-				listBoxQuestions.DataSource = bindingSource;
-				listBoxQuestions.DisplayMember = "Content";
+				var ofd = new OpenFileDialog
+				{
+					Title = "Open existing quiz file",
+					Filter = "JSON files (*.json)|*.json"
+				};
+				var result = ofd.ShowDialog();
+				if (result == DialogResult.OK)
+				{
+					_path = ofd.FileName;
+					var content = File.ReadAllText(_path);
+					_quiz = JsonSerializer.Deserialize<Quiz>(content) ?? new Quiz();
+				}
 			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message);
+				Environment.Exit(1);
+			}
+			_quiz.Questions = _quiz.Questions.OrderBy(q => q.Content).ToList();
+			bindingSource.DataSource = _quiz.Questions;
+			listBoxQuestions.DataSource = bindingSource;
+			listBoxQuestions.DisplayMember = "Content";
+			SetText();
 		}
 
 		private void buttonSave_Click(object sender, EventArgs e)
 		{
-			if (string.IsNullOrEmpty(_path)) return;
+			if (string.IsNullOrEmpty(_path))
+			{
+				var sfd = new SaveFileDialog
+				{
+					Title = "Create new quiz file",
+					Filter = "JSON files (*.json)|*.json"
+				};
+				var newQuizFile = sfd.ShowDialog();
+				if (newQuizFile == DialogResult.OK)
+				{
+
+					_path = sfd.FileName;
+					var fi = new FileInfo(_path);
+					_quiz.Name = fi.Name[..5];
+					SetText();
+				}
+				else
+				{
+					return;
+				}
+			}
+
 
 			var content = JsonSerializer.Serialize(_quiz, new JsonSerializerOptions
 			{
 				WriteIndented = true
 			});
 			File.WriteAllText(_path, content);
+		}
+
+		private void SetText()
+		{
+			var count = _quiz.Questions.Count switch
+			{
+				1 => "1 question",
+				_ => $"{_quiz.Questions.Count} questions",
+			};
+			Text = string.IsNullOrEmpty(_path) ?
+				$"New quiz - ({count})" :
+				$"{_quiz.Name} - ({count} from {_path})";
 		}
 
 		private void buttonAdd_Click(object sender, EventArgs e)
@@ -52,7 +97,7 @@ namespace QuizEditor
 			_quiz.Questions.Add(question);
 			_quiz.Questions = _quiz.Questions.OrderBy(q => q.Content).ToList();
 			FilterQuestions(textBoxSearch.Text);
-			Text = $"{_quiz.Name} - ({_quiz.Questions.Count} questions from {_path})";
+			SetText();
 		}
 
 		private void EditQuestion(Question question)
@@ -63,7 +108,7 @@ namespace QuizEditor
 		private void listBoxQuestions_MouseDoubleClick(object sender, MouseEventArgs e)
 		{
 			_selectedQuestion = listBoxQuestions.SelectedItem as Question;
-			if (_selectedQuestion!= null)
+			if (_selectedQuestion != null)
 			{
 				var formQuestion = new FormQuestion(EditQuestion, _selectedQuestion);
 				formQuestion.ShowDialog();
